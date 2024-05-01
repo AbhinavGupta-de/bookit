@@ -2,6 +2,7 @@ package org.abhinavgpt.bookit.controllers;
 
 import org.abhinavgpt.bookit.modals.Event;
 import org.abhinavgpt.bookit.services.event.EventService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +41,8 @@ public class EventController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Event> getEvent(@PathVariable long id) {
-        Event event = EventService.getEventById(id);
+        Event event = EventService.getEvent((int) id);B|
+
         return ResponseEntity.ok(event);
     }
 
@@ -48,14 +50,14 @@ public class EventController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Event> deleteEvent(@PathVariable long id) {
-        EventService.deleteEventById(id);
-        return ResponseEntity.ok(event);
+        EventService.deleteEventById((int) id);
+        return new ResponseEntity<>("Event deleted successfully.", HttpStatus.NO_CONTENT);
     }
 
     // deleteAll
-    @DeleteMapping()
-    public ResponseEntity<Event> deleteAllEvents() {
-        return null;
-    }
+//    @DeleteMapping()
+//    public ResponseEntity<Event> deleteAllEvents() {
+//        return null;
+//    }
 
 }
